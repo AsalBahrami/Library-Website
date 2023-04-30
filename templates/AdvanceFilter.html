@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    {%load static%}
+
+<head>
+	<title>Suchen</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'testApp\css\Main.css'%}">
+  <!-- <link rel="stylesheet" href="{% static 'testApp\Register.css'%}"> -->
+  <!-- <link rel="stylesheet" href="{%static 'testApp\Login.css'%}" type="text/css"> -->
+<style>
+
+
+table,tr,td,th{border:1px solid #000; border-spacing:0px; padding: 5px;
+font-family:var(--font)
+outline: none;
+}
+
+
+.erweitern{text-decoration: none !important;}
+/* input[type=text]{
+  border: 2px solid silver;
+  font-family: 'PT Mono',monospace;
+  border-radius: 7px;
+  position: relative;
+  left: 83%;
+  cursor:text;
+}
+
+input[type=text]:focus{
+  transition: border-color 0.3s ease;
+  border-color: dimgrey;
+} */
+
+
+.dataContainer{
+ padding-right: var(--padding-right);
+ padding-left: var(--padding-left);}
+.row{
+  overflow: scroll;
+  height: 400px;
+
+}
+
+
+.before_data{font-family: var(--font);}
+
+ .next, .button1, .previous {
+   background-color: var(--green);
+   color: white;
+ }
+body{font-family:var(--font);}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+margin-top: 40px;
+margin-left: auto;
+margin-right: auto;}
+
+  .grid-container2 {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+  margin-bottom: 30px;}
+
+    .container{
+      border-style:solid;
+      /* border-width: thin; */
+        /* border-radius: 5px; */}
+        h2{
+    text-align: center;
+    }
+
+    .input-group{
+  border-radius: 0px;
+    }
+    .form-row{
+      border-radius: 0px;
+    }
+
+</style>
+
+</head>
+{% include "Main.html" %}
+<body>
+  <div class="topNavigation">
+  <ul class="ul1">
+    <li style="font-size:22px;"><a class='selectable' href="{%url 'home'%}" id="Bibliothek">Home</a></li>
+    {% if user.is_authenticated %}
+   <li style="font-size:22px;"><a class='selectable' href="{%url 'books'%}" id="Login">Bücher</a></li>
+   {%endif%}
+  </ul>
+  </div>
+  <h2>Suchleiste</h2>
+
+  <main role="main" class="container">
+<form method="GET">
+
+<div class="grid-container">
+
+         <!-- author -->
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" name="author" placeholder="Autor(in)..." />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+      </div>
+
+
+         <!-- titel -->
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" name="titel" placeholder="titel..." />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+      </div>
+
+
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" name="auflage" placeholder="Auflagen" />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+        </div>
+        <!--  -->
+
+      <!-- Bemerkung--------------->
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" name="bemerkung" placeholder="Bemerkung" />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+        </div>
+      <!--  -->
+      <!-- Betreuer--------------->
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" name="betreuer" placeholder="Betreuer" />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+        </div>
+      <!--  -->
+      <!-- dk_nummer--------------->
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" name="dk_nummer" placeholder="DK_Nummer" />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+        </div>
+      <!--  -->
+      <!-- dk_etikett_buch--------------->
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" name="dk_etikett_buch" placeholder="DK_Etikett Buch" />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+        </div>
+      <!--  -->
+      <!-- dk_etikett_andere--------------->
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" name="dk_etikett_andere" placeholder="DK_Etikett andere" />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+        </div>
+      <!--  -->
+      <!-- erfasserkuerzel--------------->
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" name="erfasserkuerzel" placeholder="Erfasserkuerzel" />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+        </div>
+      <!--  -->
+
+     <!-- erscheinungsdatum--------------->
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" placeholder="Erscheinungsdatum (dd.mm.yyyy) " value="" name="erscheinungsdatum" />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+        </div>
+      <!--  -->
+      <!-- erscheinungsort--------------->
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" name="erscheinungsort" placeholder="Erscheinungsort" />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+        </div>
+      <!--  -->
+      <!-- inventarnummer--------------->
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" name="inventarnummer" placeholder="Inventarnummer" />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+        </div>
+      <!--  -->
+      <!-- isbn_nummer--------------->
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" name="isbn_nummer" placeholder="ISBN Nummer" />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+        </div>
+      <!--  -->
+      <!-- verlag--------------->
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" name="verlag" placeholder="Verlag" />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+        </div>
+      <!--  -->
+      <!-- verlagsnummer--------------->
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" name="verlagsnummer" placeholder="Verlagsnummer" />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+        </div>
+      <!--  -->
+      <!-- freies_stichwort--------------->
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" name="freies_stichwort" placeholder="Freies Stichwort" />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+        </div>
+      <!--  -->
+
+      <!-- merker--------------->
+      <div class="form-row">
+          <div class="form-group col-md-9">
+              <div class="input-group">
+                  <input class="form-control py-2  border" type="search" name="merker" placeholder="Merker" />
+                  <span class="input-group-append">
+
+                  </span>
+              </div>
+          </div>
+        </div>
+
+</div>
+
+
+<div class="grid-container2">
+<!-- sprache -->
+  <div class="form-row">
+        <div class="form-group col-md-5">
+          <label for="sprache">Spache</label>
+          <select id="Sprache" class="form-control" name="sprache">
+
+            <option value={{form.sprache}}
+            </option>
+          </select>
+        </div>
+          </div>
+
+
+
+        <!-- standort -->
+
+        <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="standort">Standort</label>
+                <select id="standort" class="form-control" name="standort">
+
+                  <option value={{form.standort}}
+                  </option>
+                </select>
+              </div>
+          </div>
+
+<!-- zustand -->
+<div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="zustand">Zustand</label>
+        <select id="zustand" class="form-control" name="zustand">
+
+          <option value={{form.zustand}}
+          </option>
+        </select>
+      </div>
+  </div>
+
+<!-- medium -->
+<div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="medium">Medium</label>
+        <select id="medium" class="form-control" name="medium">
+
+          <option value={{form.medium}}
+          </option>
+        </select>
+      </div>
+  </div>
+
+  <!-- dokumenttyp -->
+  <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="dokumenttyp">Dokumenttyp</label>
+          <select id="dokumenttyp" class="form-control" name="dokumenttyp">
+
+            <option value={{form.dokumenttyp}}
+            </option>
+          </select>
+        </div>
+    </div>
+
+  <form method="GET">
+<!--    <input type="text" name="q" value="{{request.GET.q}}" placeholder="hier tippen..."/>-->
+
+      <input type="submit" name="submit" value="Suchen"/>
+
+</form>
+
+</div>
+<!--<button type="submit" class="btn btn-primary" style="background-color:var(&#45;&#45;green)">-->
+<!--Suchen-->
+<!--</button>-->
+
+    {% if submitbutton == 'Suchen' and request.GET.query != '' %}
+    {%if query%}
+    <a href="{%url 'filter'%}" style="font-size:19px; text-decoration:none">Filter löschen</a></li>
+<div class="row">
+  <table class="col-xs-7 table-bordered table-striped table-condensed table-fixed">
+  <table>
+
+    <tr>
+      <th>Titel</th>
+      <th>Author</th>
+      <th>Dokumenttype</th>
+      <th>DK-Nummer</th>
+      <th>DK-Kennzeichnung</th>
+      <th>DK_Etikett_Buch</th>
+      <th>DK_Etikett_Andere</th>
+      <th>Auflagen</th>
+      <th>Sprache</th>
+      <th>Medium</th>
+      <th>Bemerkung</th>
+      <th>betreuer</th>
+      <th>Standort</th>
+      <th>Erfasserkürzel</th>
+      <th>Erscheinungsdatum</th>
+      <th>Erscheinungsort</th>
+      <th>Inventarnummer</th>
+      <th>ISBN</th>
+      <th>Verlag</th>
+      <th>Verlagsnummer</th>
+      <th>Entleiher</th>
+      <th>Entleiher Bemerkung</th>
+
+    </tr>
+
+{% for book in query %}
+    <tr>
+      <!-- <td>{{book.id}}</td> -->
+      <td>{{book.titel}}</td>
+      <td>{{book.author}}</td>
+      <td>{{book.dokumenttyp}}</td>
+      <td>{{book.dk_nummer}}</td>
+      <td>{{book.dk_kennzeichnung}}</td>
+      <td>{{book.dk_etikett_buch}}</td>
+      <td>{{book.dk_etikett_andere}}</td>
+      <td>{{book.auflagen}}</td>
+      <td>{{book.sprache}}</td>
+      <td>{{book.medium}}</td>
+      <td>{{book.bemerkung }}</td>
+      <td>{{book.betreuer}}</td>
+      <td>{{book.standort}}</td>
+      <td>{{book.erfasserkuerzel}}</td>
+      <td>{{book.erscheinungsdatum}}</td>
+      <td>{{book.erscheinungsort}}</td>
+      <td>{{book.inventarnummer}}</td>
+      <td>{{book.isbn_nummer}}</td>
+      <td>{{book.verlag}}</td>
+      <td>{{book.verlagsnummer}}</td>
+      <td>{{book.entleiher}}</td>
+      <td>{{book.entleiher_bem}}</td>
+  <td>
+      {%if book.entleiher|length == 0%}
+        <a data-action="ausleihen" class='selectable' href='#' data-href="{% url 'loan' book.id %}" style="background-color:#0077c0; color:white;">ausleihen</a></td>
+      {%else%}
+        <a class='selectable'
+           style="background-color:grey; color:black; text-decoration:none;">ausgeliehen</a>
+      {%endif%}
+      </td>
+      <td>
+         {%if book.entleiher|length != 0%}
+        <a data-action="zurückgeben" class='selectable' href="#" data-href="{% url 'zurueckgeben' book.id %}" style="background-color:#0077c0; color:white;">zurueckgeben</a>
+        {%else%}
+        <a class='selectable' style="background-color:#0077c0; color:white;">zurueckgeben</a>
+      {%endif%}
+      </td>
+      <!-- give auth only for admin -->
+        <td><a data-action="löschen" class='selectable' href="{% url 'delete' book.id %}" style="background-color:var(--red); color:white;">löchen</a></td>
+      <td><a class='selectable' href="{% url 'update' book.id %}" style="background-color:#6082B6; color:white;">aktualisieren</a></td>
+ </tr>
+
+  {%endfor%}
+
+  </table>
+      {%endif%}
+      {%endif%}
+
+</div>
+</form>
+  </main>
+
+<!--      jinja manual length-->
+
+<!--{% block content %}-->
+<!--    <form method="post">-->
+<!--        {%csrf_token%}-->
+<!--        &lt;!&ndash; {{ filtering.form.as_p }}-->
+<!--        <input type="submit" /> &ndash;&gt;-->
+<!--    {%if author|length %}-->
+<!--    {% for obj in filtering.qs %}-->
+<!--        {{ obj.sprache}} - {{ obj.author }}<br/>-->
+<!--    {% endfor %}-->
+<!--    {%endif%}-->
+<!--  </form>-->
+<!--{% endblock %}-->
+ <script>
+    function run(){
+       const dataTable=document.querySelector("#books-table");
+       const pDiv=document.querySelector("#popup-div");
+
+       pDiv.querySelector('button').onclick=(e)=>{
+         e.preventDefault();
+         pDiv.className="popup-div-invisible";
+         pDiv.querySelector('textarea').value='';
+         pDiv.hidden=true;
+       };
+
+       function changePDiv(href,message,bemerkung=false,yesLabel="Ja"/*,question=null,textarea=false,textareaName=null*/){
+          pDiv.hidden=true;
+          let p=pDiv.querySelector("p");
+          if(typeof message==="string")
+            p.innerText=message;
+          pDiv.querySelector('form').setAttribute('action',href);
+          pDiv.querySelector('#input-submit').value=yesLabel;
+          let b=pDiv.querySelector("textarea");
+          let bl=pDiv.querySelector("label");
+          if(!bemerkung){
+            b.value=null;
+            b.hidden=true;
+            bl.hidden=true;
+          }
+          else{
+            b.hidden=false;
+            bl.hidden=false;
+          }
+       };
+
+       dataTable.addEventListener("click",(e)=>{
+            if(e.target.nodeName!="A" || !e.target.dataset['action'])
+              return;
+            let tr= e.target.closest("tr");
+            let bookName=tr.querySelector("td").innerHTML;
+            changePDiv(
+               e.target.dataset['href'],
+              `Möchten Sie das Buch "${bookName?bookName:'NULL'}" ${e.target.dataset['action']}?`,
+              e.target.dataset['action']==='ausleihen',
+              e.target.dataset['action']
+            );
+            pDiv.className='popup-div-visible';
+       });
+    };
+    run();
+  </script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

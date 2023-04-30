@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!DOCTYPE html>
+{%load static%}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'testApp\css\Main.css'%}">
+    <link rel = "icon" href =
+  "{%static 'testApp\image\title_logo.png'%}"
+         type = "image/x-icon">
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="flex-container">
+        <div class="TU">
+          <img src="{%static 'testApp\image\logo.jpg'%}" alt="Logo" id="Logo">
+          {% if user.is_authenticated %}
+          <a href="{% url 'logout' %}">Ausloggen</a>
+          {%endif%}
+        </div>
+
+
+      <!-- top navigation -->
+
+    </div>
+  </body>
+</html>

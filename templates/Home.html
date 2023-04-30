@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{%load static%}
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+{% include "Main.html" %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+        <link rel="stylesheet" href="{%static 'testApp\css\Main.css'%}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+
+<div class="main">
+  <div class="topNavigation">
+  <ul class="ul1">
+
+    {% if user.is_authenticated %}
+    <li style="font-size:22px;"><a href="{%url 'contact'%}" id="Bibliothek">Kontakt</a></li>
+    <li style="font-size:22px;"><a href="{%url 'books'%}" id="Books">Bücher</a></li>
+   {%else%}
+     <li style="font-size:22px;"><a href="{%url 'login'%}" id="Kontakt">Login</a></li>
+   <li style="font-size:22px;"><a href="{%url 'contact'%}" id="Bibliothek">Kontakt</a></li>
+   <li style="font-size:22px;"><a href="{%url 'books'%}" id="Books">Bücher</a></li>
+   {%endif%}
+  </ul>
+</div>
+<div class="imageClass">
+    <img src="{%static 'testApp/image/bibo4.jpeg'%}" alt="bibo" id="bibo">
+  </div>
+
+  </div>
+
+    </div>
+  </body>
+</html>

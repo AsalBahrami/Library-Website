@@ -1,0 +1,93 @@
+
+
+.staffcard {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-family: var(--font);
+}
+
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+/* button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+} */
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+
+.Biblioaddress {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-family: var(--font);
+   /* grid-row: 2 / 3;} */
+}
+
+  .content-div{
+    display: flex;
+    flex-direction: row;
+    max-height: 60vh;
+  }
+
+  .staffcard{
+    min-width:18vw;
+    max-height: inherit;
+    margin-right: 2vw;
+  }
+
+  .staffcard-img-div{
+    width:100%;
+    height:45%;
+    /* border:0.1vw solid black; */
+  }
+
+  .staffcard-img-div>img{
+    width:100%;
+    height: 100%;
+  }
+
+  .Biblioaddress{
+    min-width:75vw;
+    height:inherit;
+  }
+
+  .bib-addr-img-div{
+    height:70%;
+    max-width: 100%;
+  }
+
+  /* .grid-container {
+  display: grid;
+  grid-template-columns:  auto auto;
+  padding: 10px;
+  grid-column-gap: 0px;
+  justify-content:flex-start;
+ Make the grid smaller than the container
+ grid-gap: 10px;
+
+
+}
+.grid-container > div {
+  text-align: center;
+  padding: 0px 0;
+
+} */
+p{font-family: var(--font)}

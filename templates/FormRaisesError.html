@@ -1,0 +1,19 @@
+{%load static%}
+<link rel="stylesheet" href="{% static 'testApp\css\FormRaisesError.css'%}">
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="Error">
+                <h3>{{ error|escape }}</h3>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="Error">
+            <h3>{{ error|escape }}</h3>
+        </div>
+    {% endfor %}
+{% endif %}
+<a href="{%url 'home'%}">
+<button type="button">züruck zum home page</button></a>
+<a href="{%url 'login'%}"><button type="button">nochmal versuchen</button></a>

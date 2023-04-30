@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{%include 'Main.html' %}
+{%load static%}
+<html lang="en" dir="ltr">
+<style>
+    a.hover:hover{
+    text-decoration: none;
+    }
+</style>
+  <head>
+    <meta charset="utf-8">
+    <title>löschen</title>
+    	<link rel="stylesheet" href="{% static 'testApp\css\Main.css'%}">
+  </head>
+  <body>
+<p> Sind Sie Sicher, dass Sie die Datei löschen wollen? </p>
+<form method="post">
+  {%csrf_token%}
+  <a href="{%url 'books'%}">Nein, zurückgehen</a>
+  <input type="submit" name="" value="Ja, löschen">
+
+</form>
+  </body>
+</html>

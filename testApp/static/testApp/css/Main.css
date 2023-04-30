@@ -1,0 +1,139 @@
+
+/* global variable.including color def.*/
+:root{--grey: rgb(230,230,230);
+      --red: rgb(140,28,0);
+      --green: rgb(0,140,79);
+      --tundora: #444;
+      --padding-right:30px;
+      --padding-left:30px;
+      --font:"Helvecia";}
+  .logoTxt{font-family: var(--font) !important;}
+
+.main{margin-left: 25px;
+margin-right: 25px;
+margin-top: auto;
+margin-bottom: 25px !important;
+
+}
+
+/* ausloggen annchor*/
+.TU>a{
+    font-size:20px;
+    color:var(--red);
+    border-radius:0.5vw;
+    text-decoration:none;
+    font-family: TimesNewRoman;
+    text-align:center;
+}
+
+.TU>a:hover{
+    color:dimgrey;
+    text-decoration:none;
+}
+
+/* .flex-container{display: flex;
+  flex-wrap: nowrap;} */
+
+  .logOut{  padding-top: 30px;
+    font-size: 18px;
+  }
+
+.TU{
+  width: 100%;
+  margin-top: 20px;
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.TU>*{
+    margin:0 5vw;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+}
+
+  /* .erweitern:hover {
+    background-color: #ddd;
+    color: black;
+  } */
+
+#Logo{ display: block;
+  /* margin-left: auto;
+  margin-right: auto; */
+  max-width: 16rem;
+  height: auto}
+
+.logoTxt{color: var(--tundora);
+font-weight: 500;
+font-family: var(--font);
+/* margin: 0; */
+height: 2rem;
+position: relative;
+padding-left: 58px;
+padding-top: 10px;
+}
+
+
+  .topNavigation{padding-top: 20px;}
+
+  .ul1{
+    /* padding-top:70px; */
+    border-top: none;
+    border-bottom-style: solid;
+    border-color: rgb(230,230,230);
+    text-align: center;
+    padding: 8px 16px;
+    box-shadow: 0px 10px 10px #F0F0F0;
+   -moz-box-shadow: 10px 10px 5px #F0F0F0;
+   /* -webkit-box-shadow: 10px 10px 5px #ccc;
+   -khtml-box-shadow: 10px 10px 5px #ccc; */
+
+  }
+
+  .main li{
+
+    font-family:var(--font);
+    display: inline;
+    margin-right: 50px;
+    /* text-align: 2px; */
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  #Bibliothek { color:var(--tundora); text-decoration: none;}
+  #Bibliothek:hover{color:dimgrey;}
+
+  #Books{color:var(--tundora); text-decoration:none;}
+  #Books:hover{color: dimgrey;}
+
+  #Login{color:var(--tundora);text-decoration: none;}
+  #Login:hover{color: dimgrey;}
+
+  #Kontakt{color:var(--tundora); text-decoration: none;}
+  #Kontakt:hover{color: dimgrey;}
+
+
+  #bibo{
+        object-fit: cover;
+        width: 100%;
+        height: 400px;
+    	}
+
+      .previous {
+        background-color: var(--green);
+        color: white;
+      }
+
+      .next {
+        background-color:  var(--green);
+        color: white;
+      }
+
+
+      *, ::after, ::before {
+          box-sizing: inherit !important;
+      }

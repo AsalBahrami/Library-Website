@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{%load static%}
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Kontakt</title>
+{% include "Main.html" %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+        <link rel="stylesheet" href="{%static 'testApp\css\Contact.css'%}">
+        <link rel="stylesheet" href="{%static 'testApp\css\Main.css'%}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+
+<div class="main">
+  <div class="topNavigation">
+  <ul class="ul1">
+    {% if user.is_authenticated %}
+      <li style="font-size:22px;"><a href="{%url 'home'%}" id="Bibliothek">Home</a></li>
+    <li style="font-size:22px;"><a href="{%url 'books'%}" id="Books">Bücher</a></li>
+
+      {%else%}
+        <li style="font-size:22px;"><a href="{%url 'home'%}" id="Bibliothek">Home</a></li>
+        <li style="font-size:22px;"><a href="{%url 'login'%}" id="Kontakt">Login</a></li>
+   {%endif%}
+  </ul>
+</div>
+<!-- staffcard -->
+<div class="content-div">
+    <div class="staffcard">
+      <!-- change the width to 100% by attaching the staff photos -->
+      <div class='staffcard-img-div'>
+        <h2>Henrik Stromberg, M.Sc.</h2>
+           <p class="title">Verwaltung</p>
+           <div class="icon">
+               <a href="Telefax: (05323) 72 3501">
+             <i class="fa fa-fax" style="font-size:24px"></i></a>
+        <a href="Telefon:(05323) 72 2307">
+          <i class="fa fa-phone" style="font-size:24px"></i>
+        <a href="mailto:stromberg@imw.tu-clausthal.de">
+       <i class="fa fa-envelope-o" style="font-size:24px"></i></a>
+      </div>
+
+      </div>
+      <div class='sttaffcard-info-div'>
+
+        <h2>Asal Bahrami</h2>
+        <p class="title">Webseit Verwaltung</p>
+      </div>
+      <div class="icon">
+<!--        <a href="Telefon:(05323) 3260">-->
+<!--          <i class="fa fa-phone" style="font-size:24px"></i>-->
+        <a href="mailto:asal.bahrami@tu-clausthal.de">
+       <i class="fa fa-envelope-o" style="font-size:24px"></i></a>
+      </div>
+    </div>
+
+    <!-- address -->
+    <div class="Biblioaddress">
+      <!-- change the width to 100% by attaching the staff photos -->
+      <div class='bib-addr-img-div'>
+        <img src="{%static 'testApp/image/bibo3.jpeg'%}" style="width:80%;height:90%;" id="bibo6">
+      </div>
+      <div class='bib-addr-info-div'>
+        <p>Technische Universität Clausthal
+          <br>
+Robert-Koch-Straße 32 (Gebäude B2), Zi.113
+<br>
+38678 Clausthal-Zellerfeld,
+Germany</p>
+          Telefon: (05323) 3260
+      </div>
+
+    </div>
+  </div>
+
+    </div>
+  </body>
+</html>

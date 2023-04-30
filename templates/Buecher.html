@@ -1,0 +1,352 @@
+{%include 'Main.html' %}
+{%load static%}
+<html lang="en" dir="ltr">
+
+  <head>
+
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{%static 'testApp\css\Buecher.css'%}" type="text/css">
+    <title>Bücherliste</title>
+<style>
+
+
+table,tr,td,th{border:1px solid #000; border-spacing:0px; padding: 5px;
+outline: none;
+}
+
+
+.erweitern{text-decoration: none !important;}
+/* input[type=text]{
+  border: 2px solid silver;
+  font-family: 'PT Mono',monospace;
+  border-radius: 7px;
+  position: relative;
+  left: 83%;
+  cursor:text;
+}
+
+input[type=text]:focus{
+  transition: border-color 0.3s ease;
+  border-color: dimgrey;
+} */
+
+
+.dataContainer{
+ padding-right: var(--padding-right);
+ padding-left: var(--padding-left);}
+.row{
+  overflow: scroll;
+  height: 880px;
+  width: 100%;
+}
+
+
+.before_data{font-family: var(--font);}
+
+ .next, .button1, .previous {
+   background-color: var(--green);
+   color: white;
+ }
+
+</style>
+  </head>
+  {%block content%}
+  <body>
+    <div class="topNavigation">
+    <ul class="ul1">
+      <li style="font-size:22px;"><a href="{%url 'home'%}" id="Bibliothek">Home</a></li>
+      {% if user.is_authenticated %}
+<!--       <li style="font-size:22px; background-color:red;" > <a href="{% url 'logout' %}">Ausloggen</a>-->
+     <li style="font-size:22px;"><a  href="{%url 'add'%}" id="Login">Datensatz hinzufügen</a></li>
+     <!-- authenticated only for admin -->
+     <li style="font-size:22px;"><a  href="{%url 'password'%}" id="Login">Passwort ändern</a></li>
+
+     {%endif%}
+    </ul>
+  </div>
+
+  <div class="dataContainer">
+
+    <div class="before_data">
+    <form method="GET" value="{{request.GET.q}}">
+    <input type="text" name="q" value="{{request.GET.q}}" placeholder="hier tippen..."/>
+
+      <input type="submit" name="submit" value="Suchen"/>
+      <a href="{%url 'filter'%}" class="erweitern">erweiterte Suche</a>
+
+</form>
+
+    {% if submitbutton == 'Suchen' and request.GET.q != '' %}
+{% if results %}
+<a href="{%url 'books'%}" style="font-size:19px; text-decoration:none">Filter löschen</a></li>
+    <br>
+    </div>
+
+
+<div class="row">
+  <table class="col-xs-7 table-bordered table-striped table-condensed table-fixed">
+  <table>
+
+    <tr>
+      <th>Titel</th>
+      <th>Autor</th>
+      <th>Dokumenttype</th>
+      <th>DK-Nummer</th>
+      <th>DK-Kennzeichnung</th>
+      <th>DK_Etikett_Buch</th>
+      <th>DK_Etikett_Andere</th>
+      <th>Auflagen</th>
+      <th>Sprache</th>
+      <th>Medium</th>
+      <th>Bemerkung</th>
+      <th>betreuer</th>
+      <th>Standort</th>
+      <th>Erfasserkürzel</th>
+      <th>Erscheinungsdatum</th>
+      <th>Erscheinungsort</th>
+      <th>Inventarnummer</th>
+      <th>ISBN</th>
+      <th>Verlag</th>
+      <th>Verlagsnummer</th>
+      <th>Entleiher</th>
+      <th>Entleiher Bemerkung</th>
+
+    </tr>
+
+{% for book in results %}
+    <tr>
+      <!-- <td>{{book.id}}</td> -->
+      <td>{{book.titel}}</td>
+      <td>{{book.author}}</td>
+      <td>{{book.dokumenttyp}}</td>
+      <td>{{book.dk_nummer}}</td>
+      <td>{{book.dk_kennzeichnung}}</td>
+      <td>{{book.dk_etikett_buch}}</td>
+      <td>{{book.dk_etikett_andere}}</td>
+      <td>{{book.auflagen}}</td>
+      <td>{{book.sprache}}</td>
+      <td>{{book.medium}}</td>
+      <td>{{book.bemerkung }}</td>
+      <td>{{book.betreuer}}</td>
+      <td>{{book.standort}}</td>
+      <td>{{book.erfasserkuerzel}}</td>
+      <td>{{book.erscheinungsdatum}}</td>
+      <td>{{book.erscheinungsort}}</td>
+      <td>{{book.inventarnummer}}</td>
+      <td>{{book.isbn_nummer}}</td>
+      <td>{{book.verlag}}</td>
+      <td>{{book.verlagsnummer}}</td>
+      <td>{{book.entleiher}}</td>
+      <td>{{book.entleiher_bem}}</td>
+
+      {%if books.entleiher is not defined %}
+      <td><a class='selectable' href="{% url 'ausleihen' book.id %}" style="background-color:#0077c0; color:white;">ausleihen</a></td>
+        <!-- give auth only for admin -->
+        {%endif%}
+        <td><a class='selectable' href="{% url 'delete' book.id %}" style="background-color:var(--red); color:white;">löchen</a></td>
+      <td><a class='selectable' href="{% url 'update' book.id %}" style="background-color:#6082B6; color:white;">aktualisieren</a></td>
+  </tr>
+
+  {%endfor%}
+
+  </table>
+
+</div>
+
+{% endif %}
+
+{% else %}
+
+    <!-- pagination setting -->
+    <div class="Pagination0" style="background-color:none">
+
+
+      {% if books.has_other_pages %}
+  <ul class="pagination">
+    {% if books.has_previous %}
+    <li> <a style="text-decoration:none" href="{%url 'books'%}?page=1">erste Seite</a></li>
+      <li><a href="?page={{ books.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in books.paginator.page_range %}
+      {% if books.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+    {% elif i > books.number|add:'-3'  and  i < books.number and books.has_next|add:'3'%}
+    <li><li><a href="{%url 'books'%}?&page={{i}}">{{i}}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if books.has_next %}
+
+      <li><a href="?page={{ books.next_page_number }}">&raquo;</a></li>
+
+    <li> <a style="text-decoration:none" href="{%url 'books'%}?page={{lastPage}}">letzte Seite</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+  </div>
+
+  <div class="row">
+  <table class="col-xs-7 table-bordered table-striped table-condensed table-fixed">
+  <table id="books-table">
+
+    <tr>
+      <th>Titel</th>
+      <th>Autor</th>
+      <th>Dokumenttype</th>
+      <th>DK-Nummer</th>
+      <th>DK-Kennzeichnung</th>
+      <th>DK_Etikett_Buch</th>
+      <th>DK_Etikett_Andere</th>
+      <th>Auflagen</th>
+      <th>Sprache</th>
+      <th>Medium</th>
+      <th>Bemerkung</th>
+      <th>betreuer</th>
+      <th>Standort</th>
+      <th>Erfasserkürzel</th>
+      <th>Erscheinungsdatum</th>
+      <th>Erscheinungsort</th>
+      <th>Inventarnummer</th>
+      <th>ISBN</th>
+      <th>Verlag</th>
+      <th>Verlagsnummer</th>
+      <th>Entleiher</th>
+      <th>Entleiher Bemerkung</th>
+
+    </tr>
+
+    {%for book in books %}
+    <tr data-id={{book.id}}>
+      <!-- <td>{{book.id}}</td> -->
+      <td class="book-title">{{book.titel}}</td>
+      <td>{{book.author}}</td>
+      <td>{{book.dokumenttyp}}</td>
+      <td>{{book.dk_nummer}}</td>
+      <td>{{book.dk_kennzeichnung}}</td>
+      <td>{{book.dk_etikett_buch}}</td>
+      <td>{{book.dk_etikett_andere}}</td>
+      <td>{{book.auflagen}}</td>
+      <td>{{book.sprache}}</td>
+      <td>{{book.medium}}</td>
+      <td>{{book.bemerkung }}</td>
+      <td>{{book.betreuer}}</td>
+      <td>{{book.standort}}</td>
+      <td>{{book.erfasserkuerzel}}</td>
+      <td>{{book.erscheinungsdatum}}</td>
+      <td>{{book.erscheinungsort}}</td>
+      <td>{{book.inventarnummer}}</td>
+      <td>{{book.isbn_nummer}}</td>
+      <td>{{book.verlag}}</td>
+      <td>{{book.verlagsnummer}}</td>
+      <td>{{book.entleiher}}</td>
+      <td>{{book.entleiher_bem}}</td>
+
+
+      <td>
+      {%if book.entleiher|length == 0%}
+        <a data-action="ausleihen" class='selectable' href='#' data-href="{% url 'loan' book.id %}" style="background-color:#0077c0; color:white;">ausleihen</a></td>
+      {%else%}
+        <a class='selectable'
+           style="background-color:grey; color:black; text-decoration:none;">ausgeliehen</a>
+      {%endif%}
+      </td>
+      <td>
+         {%if book.entleiher|length != 0%}
+        <a data-action="zurückgeben" class='selectable' href="#" data-href="{% url 'zurueckgeben' book.id %}" style="background-color:#0077c0; color:white;">zurueckgeben</a>
+        {%else%}
+        <a class='selectable' style="background-color:#0077c0; color:white;">zurueckgeben</a>
+      {%endif%}
+      </td>
+      <!-- give auth only for admin -->
+        <td><a data-action="löschen" class='selectable' href="{% url 'delete' book.id %}" style="background-color:var(--red); color:white;">löchen</a></td>
+      <td><a class='selectable' href="{% url 'update' book.id %}" style="background-color:#6082B6; color:white;">aktualisieren</a></td>
+  </tr>
+
+  {%endfor%}
+
+  </table>
+
+  <div hidden id="popup-div" class="popup-div-invisible">
+    <form method="post" >
+      {%csrf_token%}
+      <div>
+        <p></p>
+      </div>
+      <div>
+        <label for="bemerkungen-ta">Bemerkungen:</label>
+      </div>
+      <div>
+        <textarea color="black" name="bemerkung" id="bemerkungen-ta" multiline="true" placeholder="Bemerkungen..." cols="40" rows="5" ></textarea>
+      </div>
+      <div>
+        <button>Nein (zurück)</button>
+        <input id="input-submit" type="submit" name="submit" value="Ja">
+      </div>
+    </form>
+  </div>
+
+
+
+
+</div>
+{% endif %}
+</div>
+{%for message in messages%}
+  {{message}}
+{%endfor%}
+{%endblock%}
+    <script>
+    function run(){
+       const dataTable=document.querySelector("#books-table");
+       const pDiv=document.querySelector("#popup-div");
+
+       pDiv.querySelector('button').onclick=(e)=>{
+         e.preventDefault();
+         pDiv.className="popup-div-invisible";
+         pDiv.querySelector('textarea').value='';
+         pDiv.hidden=true;
+       };
+
+       function changePDiv(href,message,bemerkung=false,yesLabel="Ja"/*,question=null,textarea=false,textareaName=null*/){
+          pDiv.hidden=true;
+          let p=pDiv.querySelector("p");
+          if(typeof message==="string")
+            p.innerText=message;
+          pDiv.querySelector('form').setAttribute('action',href);
+          pDiv.querySelector('#input-submit').value=yesLabel;
+          let b=pDiv.querySelector("textarea");
+          let bl=pDiv.querySelector("label");
+          if(!bemerkung){
+            b.value=null;
+            b.hidden=true;
+            bl.hidden=true;
+          }
+          else{
+            b.hidden=false;
+            bl.hidden=false;
+          }
+       };
+
+       dataTable.addEventListener("click",(e)=>{
+            if(e.target.nodeName!="A" || !e.target.dataset['action'])
+              return;
+            let tr= e.target.closest("tr");
+            let bookName=tr.querySelector("td").innerHTML;
+            changePDiv(
+               e.target.dataset['href'],
+              `Möchten Sie das Buch "${bookName?bookName:'NULL'}" ${e.target.dataset['action']}?`,
+              e.target.dataset['action']==='ausleihen',
+              e.target.dataset['action']
+            );
+            pDiv.className='popup-div-visible';
+       });
+    };
+    run();
+  </script>
+  </body>
+</html>
